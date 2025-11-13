@@ -1,4 +1,4 @@
-import { GET_VISUALIZATION_USAGE } from '@eeacms/volto-freshwater-policy/constants/ActionTypes';
+import { GET_VISUALIZATION_USAGE } from '../constants/ActionTypes';
 
 const initialState = {
   get: {
