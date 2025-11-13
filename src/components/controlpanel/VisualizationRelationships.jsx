@@ -23,7 +23,7 @@ import { getContent } from '@plone/volto/actions/content/content';
 import Helmet from '@plone/volto/helpers/Helmet/Helmet';
 import { getBaseUrl } from '@plone/volto/helpers/Url/Url';
 
-import { getVisualizationRelationships } from '@eeacms/volto-freshwater-policy/actions/visualizationRelationships';
+import { getVisualizationRelationships } from '@../actions/visualizationRelationships';
 import map from 'lodash/map';
 
 const messages = defineMessages({
