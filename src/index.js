@@ -1,7 +1,4 @@
-import {
-  visualizationUsage,
-  visualizationRelationships,
-} from './reducers';
+import { visualizationUsage, visualizationRelationships } from './reducers';
 import VisualizationUsage from './components/controlpanel/VisualizationUsage';
 import VisualizationRelationships from './components/controlpanel/VisualizationRelationships';
 
