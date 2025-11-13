@@ -23,7 +23,7 @@ import { getContent } from '@plone/volto/actions/content/content';
 import Helmet from '@plone/volto/helpers/Helmet/Helmet';
 import { getBaseUrl } from '@plone/volto/helpers/Url/Url';
 
-import { getVisualizationUsage } from '../actions/visualizationUsage';
+import { getVisualizationUsage } from '../../actions/visualizationUsage';
 import Circle from '@plone/volto/components/manage/Contents/circle';
 import config from '@plone/volto/registry';
 import map from 'lodash/map';
