@@ -122,7 +122,18 @@ function VisualizationUsage(props) {
                 />
               </Header>
             </Segment>
-
+            <Segment>
+              <a
+                href={`${getBaseUrl(props.pathname)}/++api++/@@export-visualization-usage`}
+                title="Download"
+                target="_blank"
+                rel="noopener"
+                className="ui button primary download-as-xls"
+              >
+                <i className="ri-file-download-line"></i>
+                Download as Excel
+              </a>
+            </Segment>
             <Segment>
               <Table cell>
                 <Table.Row>
