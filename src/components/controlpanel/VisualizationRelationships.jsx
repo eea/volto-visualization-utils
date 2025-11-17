@@ -126,7 +126,9 @@ function VisualizationRelationships(props) {
             </Segment>
             <Segment>
               <a
-                href={`${getBaseUrl(props.pathname)}/++api++/@@export-visualization-relationships`}
+                href={`${getBaseUrl(
+                  props.pathname,
+                )}/++api++/@@export-visualization-relationships`}
                 title="Download"
                 target="_blank"
                 rel="noopener"

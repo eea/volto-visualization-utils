@@ -124,7 +124,9 @@ function VisualizationUsage(props) {
             </Segment>
             <Segment>
               <a
-                href={`${getBaseUrl(props.pathname)}/++api++/@@export-visualization-usage`}
+                href={`${getBaseUrl(
+                  props.pathname,
+                )}/++api++/@@export-visualization-usage`}
                 title="Download"
                 target="_blank"
                 rel="noopener"
