@@ -1,6 +1,7 @@
 import { visualizationUsage, visualizationRelationships } from './reducers';
 import VisualizationUsage from './components/controlpanel/VisualizationUsage';
 import VisualizationRelationships from './components/controlpanel/VisualizationRelationships';
+import { withManagerPermission } from './helpers';
 
 const applyConfig = (config) => {
   // addonReducers
@@ -28,11 +29,11 @@ const applyConfig = (config) => {
     ...config.addonRoutes,
     {
       path: '/controlpanel/visualization-usage',
-      component: VisualizationUsage,
+      component: withManagerPermission(VisualizationUsage),
     },
     {
       path: '/controlpanel/visualization-relationships',
-      component: VisualizationRelationships,
+      component: withManagerPermission(VisualizationRelationships),
     },
   ];
 
