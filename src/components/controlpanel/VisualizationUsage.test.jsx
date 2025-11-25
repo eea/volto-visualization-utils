@@ -75,10 +75,7 @@ const renderComponent = (store = defaultStore, props = {}) => {
   return render(
     <Provider store={store}>
       <IntlProvider locale="en" messages={messages}>
-        <VisualizationUsage
-          location={{ pathname: '/test' }}
-          {...props}
-        />
+        <VisualizationUsage location={{ pathname: '/test' }} {...props} />
       </IntlProvider>
     </Provider>,
   );
@@ -102,9 +99,14 @@ describe('VisualizationUsage', () => {
 
   it('renders download button', () => {
     renderComponent();
-    const downloadLink = screen.getByRole('link', { name: /Download as Excel/i });
+    const downloadLink = screen.getByRole('link', {
+      name: /Download as Excel/i,
+    });
     expect(downloadLink).toBeInTheDocument();
-    expect(downloadLink).toHaveAttribute('href', '/test/++api++/@@export-visualization-usage');
+    expect(downloadLink).toHaveAttribute(
+      'href',
+      '/test/++api++/@@export-visualization-usage',
+    );
   });
 
   it('shows loader when loading', () => {
@@ -116,10 +118,10 @@ describe('VisualizationUsage', () => {
       },
     });
     renderComponent(loadingStore);
-    expect(document.querySelector('.ui.active.centered.inline.loader')).toBeInTheDocument();
+    expect(
+      document.querySelector('.ui.active.centered.inline.loader'),
+    ).toBeInTheDocument();
   });
-
-
 
   it('renders pagination when there are pages', () => {
     const storeWithPages = mockStore({

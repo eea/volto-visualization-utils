@@ -46,7 +46,8 @@ const defaultStore = mockStore({
 });
 
 const messages = {
-  'Visualizations relationship with connectors': 'Visualizations relationship with connectors',
+  'Visualizations relationship with connectors':
+    'Visualizations relationship with connectors',
   Visualization: 'Visualization',
   Connector: 'Connector',
   File: 'File',
@@ -73,10 +74,10 @@ describe('VisualizationRelationships', () => {
 
   it('renders without crashing', () => {
     renderComponent();
-    expect(screen.getByText('Visualizations relationship with connectors')).toBeInTheDocument();
+    expect(
+      screen.getByText('Visualizations relationship with connectors'),
+    ).toBeInTheDocument();
   });
-
-
 
   it('renders table headers', () => {
     renderComponent();
@@ -87,9 +88,14 @@ describe('VisualizationRelationships', () => {
 
   it('renders download button', () => {
     renderComponent();
-    const downloadLink = screen.getByRole('link', { name: /Download as Excel/i });
+    const downloadLink = screen.getByRole('link', {
+      name: /Download as Excel/i,
+    });
     expect(downloadLink).toBeInTheDocument();
-    expect(downloadLink).toHaveAttribute('href', '/test/++api++/@@export-visualization-relationships');
+    expect(downloadLink).toHaveAttribute(
+      'href',
+      '/test/++api++/@@export-visualization-relationships',
+    );
   });
 
   it('shows loader when loading', () => {
@@ -101,7 +107,9 @@ describe('VisualizationRelationships', () => {
       },
     });
     renderComponent(loadingStore);
-    expect(document.querySelector('.ui.active.centered.inline.loader')).toBeInTheDocument();
+    expect(
+      document.querySelector('.ui.active.centered.inline.loader'),
+    ).toBeInTheDocument();
   });
 
   it('renders items in the table', () => {
