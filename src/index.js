@@ -1,7 +1,11 @@
 import { visualizationUsage, visualizationRelationships } from './reducers';
 import VisualizationUsage from './components/controlpanel/VisualizationUsage';
 import VisualizationRelationships from './components/controlpanel/VisualizationRelationships';
-import { withManagerPermission } from './helpers';
+import { withViewPermission } from './helpers';
+
+// Import block installers
+import installVisualizationRelationshipsBlock from './components/blocks/VisualizationRelationships';
+import installVisualizationUsageBlock from './components/blocks/VisualizationUsage';
 
 const applyConfig = (config) => {
   // addonReducers
@@ -29,15 +33,19 @@ const applyConfig = (config) => {
     ...config.addonRoutes,
     {
       path: '/controlpanel/visualization-usage',
-      component: withManagerPermission(VisualizationUsage),
+      component: withViewPermission(VisualizationUsage),
     },
     {
       path: '/controlpanel/visualization-relationships',
-      component: withManagerPermission(VisualizationRelationships),
+      component: withViewPermission(VisualizationRelationships),
     },
   ];
 
-  return config;
+  // Apply block configurations while preserving existing functionality
+  return [
+    installVisualizationRelationshipsBlock,
+    installVisualizationUsageBlock,
+  ].reduce((acc, apply) => apply(acc), config);
 };
 
 export default applyConfig;

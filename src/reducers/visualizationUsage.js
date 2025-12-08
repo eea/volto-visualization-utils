@@ -7,6 +7,7 @@ const initialState = {
     error: null,
   },
   items: [],
+  items_total: 0,
 };
 
 /**
@@ -27,7 +28,7 @@ function getRequestKey(actionType) {
  * @returns {Object} New state.
  */
 
-export default function visualizationUsage(state = initialState, action = {}) {
+export default function visualizationUsage(state = initialState, action) {
   switch (action.type) {
     case `${GET_VISUALIZATION_USAGE}_PENDING`:
       return {

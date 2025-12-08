@@ -7,6 +7,7 @@ const initialState = {
     error: null,
   },
   items: [],
+  items_total: 0,
 };
 
 /**
@@ -29,7 +30,7 @@ function getRequestKey(actionType) {
 
 export default function visualizationRelationships(
   state = initialState,
-  action = {},
+  action,
 ) {
   switch (action.type) {
     case `${GET_VISUALIZATION_RELATIONSHIPS}_PENDING`:
