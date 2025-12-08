@@ -4,22 +4,22 @@ import { useLocation } from 'react-router-dom';
 import { getBaseUrl } from '@plone/volto/helpers/Url/Url';
 import { getVisualizationUsage } from '../actions/visualizationUsage';
 
-export const connectToVisualizationUsage = () => (
-  WrappedComponent,
-) => {
+export const connectToVisualizationUsage = () => (WrappedComponent) => {
   return (props) => {
     const location = useLocation();
     const dispatch = useDispatch();
-    
+
     // Enhanced store initialization check
     const visualizations = useSelector((state) => {
       if (!state.visualizationUsage) {
-        console.warn('Redux store not initialized for visualizationUsage, using fallback');
+        console.warn(
+          'Redux store not initialized for visualizationUsage, using fallback',
+        );
         return { get: { loading: false }, items: {}, items_total: 0 };
       }
       return state.visualizationUsage;
     });
-    
+
     const [activePage, setActivePage] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState(10);
 
@@ -36,7 +36,11 @@ export const connectToVisualizationUsage = () => (
 
     const updateResults = useCallback(() => {
       // Enhanced safety checks
-      if (!visualizations || requestKey === lastRequestRef.current || visualizations.get?.loading) {
+      if (
+        !visualizations ||
+        requestKey === lastRequestRef.current ||
+        visualizations.get?.loading
+      ) {
         return;
       }
 
@@ -47,7 +51,13 @@ export const connectToVisualizationUsage = () => (
 
       lastRequestRef.current = requestKey;
       dispatch(getVisualizationUsage(baseUrl, requestOptions));
-    }, [activePage, itemsPerPage, baseUrl, requestKey, visualizations.get?.loading]);
+    }, [
+      activePage,
+      itemsPerPage,
+      baseUrl,
+      requestKey,
+      visualizations.get?.loading,
+    ]);
 
     // Calculate page count from results
     const pages = useMemo(() => {

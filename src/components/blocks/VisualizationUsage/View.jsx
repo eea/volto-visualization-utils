@@ -57,11 +57,11 @@ const VisualizationUsageView = (props) => {
   } = data;
 
   // Memoize calculations to prevent unnecessary re-renders
-  const currentItemsPerPage = useMemo(() => 
-    blockItemsPerPage || itemsPerPage, 
-    [blockItemsPerPage, itemsPerPage]
+  const currentItemsPerPage = useMemo(
+    () => blockItemsPerPage || itemsPerPage,
+    [blockItemsPerPage, itemsPerPage],
   );
-  
+
   const itemsPerPageChoices = useMemo(() => [10, 25, 50, 'All'], []);
 
   return (
@@ -100,9 +100,9 @@ const VisualizationUsageView = (props) => {
         </Table.Header>
 
         <Table.Body>
-          {(!visualizationData || 
-            typeof visualizationData !== 'object' || 
-            visualizationData === null || 
+          {(!visualizationData ||
+            typeof visualizationData !== 'object' ||
+            visualizationData === null ||
             !visualizationData.get) && (
             <Table.Row>
               <Table.Cell colSpan="2">
@@ -111,42 +111,46 @@ const VisualizationUsageView = (props) => {
             </Table.Row>
           )}
 
-          {visualizationData && 
-           typeof visualizationData === 'object' && 
-           visualizationData !== null && 
-           visualizationData.get && 
-           Object.keys(visualizationData.items || {}).map((item) => (
-            <Table.Row key={item}>
-              <Table.Cell>
-                <strong>{item}</strong>
-              </Table.Cell>
+          {visualizationData &&
+            typeof visualizationData === 'object' &&
+            visualizationData !== null &&
+            visualizationData.get &&
+            Object.keys(visualizationData.items || {}).map((item) => (
+              <Table.Row key={item}>
+                <Table.Cell>
+                  <strong>{item}</strong>
+                </Table.Cell>
 
-              <Table.Cell>
-                {(visualizationData?.items?.[item] || []).map((obj) => (
-                  <div key={obj.url}>
-                    <span>
-                      <Circle
-                        color={
-                          config.settings.workflowMapping[obj.review_state]
-                            ?.color || 'grey'
-                        }
-                        size="15px"
-                      />
-                    </span>
-                    {messages[obj.review_state]
-                      ? intl.formatMessage(messages[obj.review_state])
-                      : obj.review_title ||
-                        obj.review_state ||
-                        intl.formatMessage(messages.no_workflow_state)}
-                    <span> </span>
-                    <a target="_blank" rel="noopener noreferrer" href={obj.url}>
-                      {obj.path}
-                    </a>
-                  </div>
-                ))}
-              </Table.Cell>
-            </Table.Row>
-          ))}
+                <Table.Cell>
+                  {(visualizationData?.items?.[item] || []).map((obj) => (
+                    <div key={obj.url}>
+                      <span>
+                        <Circle
+                          color={
+                            config.settings.workflowMapping[obj.review_state]
+                              ?.color || 'grey'
+                          }
+                          size="15px"
+                        />
+                      </span>
+                      {messages[obj.review_state]
+                        ? intl.formatMessage(messages[obj.review_state])
+                        : obj.review_title ||
+                          obj.review_state ||
+                          intl.formatMessage(messages.no_workflow_state)}
+                      <span> </span>
+                      <a
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        href={obj.url}
+                      >
+                        {obj.path}
+                      </a>
+                    </div>
+                  ))}
+                </Table.Cell>
+              </Table.Row>
+            ))}
         </Table.Body>
       </Table>
 
