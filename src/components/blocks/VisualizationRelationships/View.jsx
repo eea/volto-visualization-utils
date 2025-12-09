@@ -3,6 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { useMemo } from 'react';
 import map from 'lodash/map';
 import { connectToVisualizationRelationships } from '../../../hocs/connectToVisualizationRelationships';
+import config from '@plone/volto/registry';
 
 const VisualizationRelationshipsView = connectToVisualizationRelationships()((
   props,
@@ -41,7 +42,8 @@ const VisualizationRelationshipsView = connectToVisualizationRelationships()((
 
   const hasItems =
     !isLoading && visualizationData.items && visualizationData.items.length > 0;
-  debugger;
+  const root = config.settings.prefixPath ?? '';
+
   return (
     <div className="visualization-relationships-block">
       {title && <h3>{title}</h3>}
@@ -50,7 +52,10 @@ const VisualizationRelationshipsView = connectToVisualizationRelationships()((
       {showDownload && (
         <div style={{ marginBottom: '1rem' }}>
           <a
-            href={`${baseUrl}/@@export-visualization-relationships`}
+            href={`${root}/++api++${baseUrl.replace(
+              root,
+              '',
+            )}/@@export-visualization-relationships`}
             title="Download"
             target="_blank"
             rel="noopener"

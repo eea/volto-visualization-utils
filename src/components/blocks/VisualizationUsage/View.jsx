@@ -4,6 +4,7 @@ import { useMemo } from 'react';
 import Circle from '@plone/volto/components/manage/Contents/circle';
 import config from '@plone/volto/registry';
 import map from 'lodash/map';
+import { connectToVisualizationUsage } from '../../../hocs/connectToVisualizationUsage';
 
 const messages = defineMessages({
   private: {
@@ -36,7 +37,7 @@ const messages = defineMessages({
   },
 });
 
-const VisualizationUsageView = (props) => {
+const VisualizationUsageView = connectToVisualizationUsage()((props) => {
   const {
     data = {},
     visualizationData,
@@ -63,6 +64,7 @@ const VisualizationUsageView = (props) => {
   );
 
   const itemsPerPageChoices = useMemo(() => [10, 25, 50, 'All'], []);
+  const root = config.settings.prefixPath ?? '';
 
   return (
     <div className="visualization-usage-block">
@@ -72,7 +74,10 @@ const VisualizationUsageView = (props) => {
       {showDownload && (
         <div style={{ marginBottom: '1rem' }}>
           <a
-            href={`${baseUrl}/++api++/@@export-visualization-usage`}
+            href={`${root}/++api++${baseUrl.replace(
+              root,
+              '',
+            )}/@@export-visualization-usage`}
             title="Download"
             target="_blank"
             rel="noopener"
@@ -204,6 +209,6 @@ const VisualizationUsageView = (props) => {
       </div>
     </div>
   );
-};
+});
 
 export default VisualizationUsageView;
