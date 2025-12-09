@@ -86,13 +86,13 @@ const VisualizationRelationshipsView = connectToVisualizationRelationships()((
         </Table.Header>
 
         <Table.Body>
-           {isLoading && (
-             <Table.Row>
-               <Table.Cell colSpan="3">
-                 <Loader active inline="centered" role="progressbar" />
-               </Table.Cell>
-             </Table.Row>
-           )}
+          {isLoading && (
+            <Table.Row>
+              <Table.Cell colSpan="3">
+                <Loader active inline="centered" role="progressbar" />
+              </Table.Cell>
+            </Table.Row>
+          )}
 
           {hasItems &&
             visualizationData.items.map((item) => (
