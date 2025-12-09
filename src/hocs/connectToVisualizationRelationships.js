@@ -70,7 +70,7 @@ export const connectToVisualizationRelationships = () => (WrappedComponent) => {
       itemsPerPage,
       baseUrl,
       requestKey,
-      visualizations
+      visualizations,
     ]);
 
     // Calculate page count from results
