@@ -12,14 +12,10 @@ export const connectToVisualizationRelationships = () => (WrappedComponent) => {
     // Enhanced store initialization with comprehensive safety checks
     const visualizations = useSelector((state) => {
       if (!state) {
-        console.warn('Redux state is undefined, using fallback');
         return { get: { loading: false }, items: [], items_total: 0 };
       }
 
       if (!state.visualizationRelationships) {
-        console.warn(
-          'visualizationRelationships state not initialized, using fallback',
-        );
         return { get: { loading: false }, items: [], items_total: 0 };
       }
 
@@ -27,16 +23,10 @@ export const connectToVisualizationRelationships = () => (WrappedComponent) => {
 
       // Validate state structure
       if (!stateData || typeof stateData !== 'object') {
-        console.warn(
-          'Invalid visualizationRelationships state structure, using fallback',
-        );
         return { get: { loading: false }, items: [], items_total: 0 };
       }
 
       if (!stateData.get || typeof stateData.get !== 'object') {
-        console.warn(
-          'Invalid visualizationRelationships.get structure, using fallback',
-        );
         return { ...stateData, get: { loading: false } };
       }
 
@@ -75,11 +65,12 @@ export const connectToVisualizationRelationships = () => (WrappedComponent) => {
       lastRequestRef.current = requestKey;
       dispatch(getVisualizationRelationships(baseUrl, requestOptions));
     }, [
+      dispatch,
       activePage,
       itemsPerPage,
       baseUrl,
       requestKey,
-      visualizations?.get?.loading,
+      visualizations
     ]);
 
     // Calculate page count from results

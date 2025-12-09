@@ -12,9 +12,6 @@ export const connectToVisualizationUsage = () => (WrappedComponent) => {
     // Enhanced store initialization check
     const visualizations = useSelector((state) => {
       if (!state.visualizationUsage) {
-        console.warn(
-          'Redux store not initialized for visualizationUsage, using fallback',
-        );
         return { get: { loading: false }, items: {}, items_total: 0 };
       }
       return state.visualizationUsage;
@@ -52,11 +49,12 @@ export const connectToVisualizationUsage = () => (WrappedComponent) => {
       lastRequestRef.current = requestKey;
       dispatch(getVisualizationUsage(baseUrl, requestOptions));
     }, [
+      dispatch,
       activePage,
       itemsPerPage,
       baseUrl,
       requestKey,
-      visualizations.get?.loading,
+      visualizations,
     ]);
 
     // Calculate page count from results
