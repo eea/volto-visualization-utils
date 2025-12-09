@@ -57,6 +57,18 @@ const VisualizationUsageView = connectToVisualizationUsage()((props) => {
     itemsPerPage: blockItemsPerPage = '10',
   } = data;
 
+  const safeBaseUrl = useMemo(() => {
+    if (!baseUrl || typeof baseUrl !== 'string') {
+      return '';
+    }
+    // Remove trailing slash and validate URL format
+    const cleanBaseUrl = baseUrl.replace(/\/$/, '');
+    if (!cleanBaseUrl.startsWith('http') && !cleanBaseUrl.startsWith('/')) {
+      return '';
+    }
+    return cleanBaseUrl;
+  }, [baseUrl]);
+
   // Memoize calculations to prevent unnecessary re-renders
   const currentItemsPerPage = useMemo(
     () => blockItemsPerPage || itemsPerPage,
@@ -74,7 +86,7 @@ const VisualizationUsageView = connectToVisualizationUsage()((props) => {
       {showDownload && (
         <div style={{ marginBottom: '1rem' }}>
           <a
-            href={`${root}/++api++${baseUrl.replace(
+            href={`${root}/++api++${safeBaseUrl.replace(
               root,
               '',
             )}/@@export-visualization-usage`}
