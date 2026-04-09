@@ -1,4 +1,20 @@
-require('dotenv').config({ path: __dirname + '/.env' })
+require('dotenv').config({ path: __dirname + '/.env' });
+
+const fs = require('fs');
+const path = require('path');
+
+const projectRootPath = `${__dirname}/../../..`;
+let voltoSlatePath = '@plone/volto-slate/src';
+if (
+  fs.existsSync(
+    path.join(
+      projectRootPath,
+      'node_modules/@plone/volto/packages/volto-slate',
+    ),
+  )
+) {
+  voltoSlatePath = '@plone/volto/packages/volto-slate/src';
+}
 
 module.exports = {
   testMatch: ['**/src/addons/**/?(*.)+(spec|test).[jt]s?(x)'],
@@ -17,10 +33,8 @@ module.exports = {
     '@eeacms/search/(.*)$': '<rootDir>/src/addons/volto-searchlib/searchlib/$1',
     '@eeacms/search': '<rootDir>/src/addons/volto-searchlib/searchlib',
     '@eeacms/(.*?)/(.*)$': '<rootDir>/node_modules/@eeacms/$1/src/$2',
-    '@plone/volto-slate$':
-      '<rootDir>/node_modules/@plone/volto/packages/volto-slate/src',
-    '@plone/volto-slate/(.*)$':
-      '<rootDir>/node_modules/@plone/volto/packages/volto-slate/src/$1',
+    '@plone/volto-slate$': `<rootDir>/node_modules/${voltoSlatePath}`,
+    '@plone/volto-slate/(.*)$': `<rootDir>/node_modules/${voltoSlatePath}/$1`,
     '~/(.*)$': '<rootDir>/src/$1',
     'load-volto-addons':
       '<rootDir>/node_modules/@plone/volto/jest-addons-loader.js',
@@ -48,4 +62,4 @@ module.exports = {
       '<rootDir>/node_modules/@eeacms/volto-visualization-utils/jest.setup.js',
     ],
   }),
-}
+};

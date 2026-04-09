@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUser } from '@plone/volto/actions';
-import { Unauthorized } from '@plone/volto/components';
+import { getUser } from '@plone/volto/actions/users/users';
+import Unauthorized from '@plone/volto/components/theme/Unauthorized/Unauthorized';
 import { Container } from 'semantic-ui-react';
 
 export const withManagerPermission = (Component) => {
