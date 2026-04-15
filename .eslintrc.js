@@ -16,8 +16,8 @@ if (configFile) {
     voltoPath = `./${jsConfig.baseUrl}/${pathsConfig['@plone/volto'][0]}`;
 }
 
-const AddonRegistry = require(`${voltoPath}/addon-registry.js`).default;
-const registry = new AddonRegistry(projectRootPath);
+const { AddonRegistry } = require('@plone/registry/addon-registry');
+const { registry } = AddonRegistry.init(projectRootPath);
 
 // Extends ESlint configuration for adding the aliases to `src` directories in Volto addons
 const addonAliases = Object.keys(registry.packages).map((o) => [
